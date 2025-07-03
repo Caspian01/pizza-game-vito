@@ -1,0 +1,325 @@
+html{
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    padding: 0;
+    margin: 0;
+    background-color: #b6a785;
+    color: #3E4E3C;
+    font-family: 'Poppins', sans-serif;
+}
+
+.pizza-game-container{
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.widgets-game-container{
+    gap: 2rem;
+    padding: 0;
+    height: 95%;
+    width: 95%;
+    display: block;
+    padding-top: 2rem;
+    flex-direction: column;
+}
+
+.crust-image{
+    width: 500px;
+    height: fit-content;
+}
+
+.chip-list{
+    display: flex;
+    gap: 1rem;
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.chip {
+    width: 8rem;
+    background: #FFF8E7;
+    border: 2px solid #A33327;
+    padding: 8px 16px;
+    border-radius: 30px;
+    margin: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+  
+.chip.selected {
+    background: #D9381E;
+    color: white;
+}
+  
+.btn-container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.img-container{
+    width: 5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.img-container > img{
+    height: 50px;
+}
+
+.pizza-img-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    overflow: hidden;
+}
+
+.btn-container-game{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 2rem;
+    gap: 1rem;
+}
+
+#popupBtn{
+    width: 10rem;
+    height: 4rem;
+    background: #FFF8E7;
+    color: black;
+    border: 2px solid #A33327;
+    padding: 8px 16px;
+    border-radius: 30px;
+    margin: 5px;
+    cursor: pointer;
+}
+
+#popupBtn:hover {
+    background: #D9381E;
+    color: white;
+}
+
+#popupBtn:active {
+    transform: scale(0.95);
+    background-color: #ccc;
+}
+
+.btn-container-game > button{
+    width: 10rem;
+    height: 4rem;
+    background: #FFF8E7;
+    border: 2px solid #A33327;
+    padding: 8px 16px;
+    border-radius: 30px;
+    margin: 5px;
+    cursor: pointer;
+}
+
+.btn-container-game > button:hover {
+    background: #D9381E;
+    color: white;
+}
+
+.btn-container-game > button:active {
+    transform: scale(0.95);
+    background-color: #ccc;
+}
+
+/* Toppings Styling */
+.topping-pineapple, .topping-olive, .topping-bacon, .topping-hotpepper, .topping-basil, .topping-pepperoni, .topping-onion, .topping-sausage, .topping-ham, .topping-jalapano{
+    position: absolute;
+    border-radius: 50%;
+    z-index: 3;
+}
+
+#game-timer, #doneButton, #clearButton {
+  display: none;
+}
+
+/* Pop up */
+.overlay {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.7);
+    transition: opacity 500ms;
+    visibility: hidden;
+    opacity: 0;
+    z-index: 1000;
+}
+
+.overlay:target {
+  visibility: visible;
+  opacity: 1;
+}
+
+.popup {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin: 70px auto;
+    padding: 1rem;
+    background: #fff;
+    border-radius: 5px;
+    width: 30%;
+    position: relative;
+}
+
+.popup h2 {
+  margin-top: 0;
+  color: #333;
+  font-family: Tahoma, Arial, sans-serif;
+}
+
+.popup .close {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  font-size: 30px;
+  font-weight: bold;
+  text-decoration: none;
+  color: #333;
+}
+
+.popup .content {
+  max-height: 30%;
+  overflow: auto;
+}
+
+.btn-container-popup{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+
+/* Overlay */
+.overlay-start {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7); /* Dimmed background */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+/* Modal popup */
+.popup-start {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: white;
+    padding: 2rem;
+    border-radius: 1rem;
+    width: 30vw;
+    text-align: center;
+    box-shadow: 0 0 30px rgba(0,0,0,0.3);
+}
+
+.popup-start button {
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  background: #ff4d4d;
+  color: white;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+}
+
+.popup-start button:hover {
+  background: #e03e3e;
+}
+
+.header-results{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.points-earned{
+    display: flex;
+}
+
+#animation-win, #animation-fail{
+    display: none;
+}
+
+.start-animation{
+    width: 50vw; 
+    height: 25vh;
+}
+
+#popupContent3header, #popupContent4header, #popupContent5header{
+    margin-bottom: 0;
+}
+
+#popupTitle, #popupContent{
+    text-align: center;
+}
+
+
+@media (max-width: 600px) {
+
+    .popup-start{
+        width: 75vw;
+        height: 80vh;
+    }
+
+    .widgets-game-container{
+        padding-top: 0;
+    }
+
+    .pizza-game-container > h1{
+        margin: 0;
+        padding-top: 3rem;
+    }
+
+    .popup{
+        margin: 0;
+        width: 75vw;
+    }
+
+    .btn-container{
+        width: 20vw;
+    }
+
+    .popup-start > p{
+        margin: 0;
+    }
+
+    .crust-image{
+        width: 80%;
+    }
+
+    .pizza-img-container{
+        height: 40%;
+    }
+
+    .topping-pineapple, .topping-olive, .topping-bacon, .topping-hotpepper, .topping-basil, .topping-pepperoni, .topping-onion, .topping-sausage, .topping-ham, .topping-jalapano{
+        width: 70%;
+    }
+}

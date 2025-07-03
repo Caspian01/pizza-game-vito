@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guess-a-Za</title>
+    <link href="styles.css" rel="stylesheet"></link>
+    <script
+    src="https://unpkg.com/@dotlottie/player-component@2.7.12/dist/dotlottie-player.mjs"
+    type="module"
+    ></script>
+    <script src="https://unpkg.com/qr-code-styling@1.5.0/lib/qr-code-styling.js"></script>
+</head>
+<body>
+    <div id="popup1" class="overlay">
+        <div class="popup">
+            <div class="header-results">
+                <h1 id="popupTitle"></h1>
+                <div id="animation-results">
+                    <dotlottie-player
+                    src="https://lottie.host/2d0c2945-9e30-4c85-a169-ea9f49e968cf/A8P8IDTmop.lottie"
+                    background="transparent"
+                    speed="1"
+                    style="width: 250px; height: 250px"
+                    loop
+                    autoplay
+                    ></dotlottie-player>
+                </div>
+                <div>
+            </div>
+                <div class="content" id="popupContent"></div>
+                <div class="points-earned">
+                    Points for the round: &nbsp;
+                    <div class="content" id="popupContent1"></div>
+                </div>
+                
+                <div class="content" id="popupContent2"></div>
+            </div>
+            
+            <div class="content">
+                <h3 id="popupContent3header"></h3>
+                <div id="popupContent3"></div>
+                </div>
+                <div class="content">
+                <h3 id="popupContent4header"></h3>
+                <div id="popupContent4"></div>
+                </div>
+                <div class="content">
+                <h3 id="popupContent5header"></h3>
+                <div id="popupContent5"></div>
+            </div>
+            <div class="btn-container-popup">
+                <button id="popupBtn" onclick="closePopup2()">Let's Toss Another One!</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="popupOverlay" class="overlay-start">
+        <div class="popup-start">
+            <div class="failed-animation">   
+                <dotlottie-player class="start-animation"
+                src="https://lottie.host/8f959197-6daa-41ee-b6ef-8b6e4aeda1f1/xTagp1n6iT.lottie"
+                background="transparent"
+                speed="1"
+                loop
+                autoplay
+                ></dotlottie-player>
+            </div>
+            <h2>Welcome to the Pizza Game! 🍕</h2>
+            <p>
+                <strong>Pizzaiolo in training!</strong><br><br>
+
+                Pick the right toppings to match our pizza and show off your skills!<br><br>
+
+                🎯 We’ll tell you:<br>
+                ✅ What you got right<br>
+                ❌ What doesn’t belong<br>
+                ⚠️ What you missed<br><br>
+
+                💸 <strong>Win Dollars Toward Your Next Pizza!</strong><br>
+                Save big on your next visit — your perfect pie could earn you rewards!<br><br>
+
+                Buona fortuna! 🍀
+            </p>
+            <button id="popupBtn" onclick="closePopup()">Let's Play!</button>
+        </div>
+    </div>
+
+    <div class="pizza-game-container">
+        <h1>Vito's Pizza🍕</h1>
+        <div id="game-timer">
+            <div id="timer">Time Left: <span id="time">60</span> seconds</div>
+            <div id="order">Order: <span id="orderText"></span></div>
+        </div>
+        <div class="widgets-game-container">
+            <div class="pizza-img-container">
+                <img class="crust-image" src="assets/crust_default.webp" alt="Pizza Crust">
+            </div>
+            <div class="chip-list">
+                <div class="btn-container">
+                    <div class="img-container">
+                        <img src="assets\red_sauce.webp" alt="Red Sauce">
+                    </div>
+                    <button id="red-sauce" class="chip">Red Sauce</button>
+                </div>
+
+                <div class="btn-container">
+                    <div class="img-container">
+                        <img src="assets\cheese.webp" alt="Cheese">
+                    </div>
+                    <button id="cheese" class="chip">Cheese</button>
+                </div>
+
+                <div class="btn-container">
+                    <div class="img-container">
+                        <img src="assets\pineapple.webp" alt="Pineapple">
+                    </div>
+                    <button id="pineapple" class="chip">Pineapple</button>
+                </div>
+
+                <div class="btn-container">
+                    <div class="img-container">
+                        <img src="assets\olive.webp" alt="Olive">
+                    </div>
+                    <button id="olive" class="chip">Olive</button>
+                </div>
+
+                <div class="btn-container">
+                    <div class="img-container">
+                        <img src="assets\bacon.webp" alt="Bacon">
+                    </div>
+                    <button id="bacon" class="chip">Bacon</button>
+                </div>
+
+                <div class="btn-container">
+                    <div class="img-container">
+                        <img src="assets\ham.webp" alt="Ham">
+                    </div>
+                    <button id="ham" class="chip">Ham</button>
+                </div>
+
+                <div class="btn-container">
+                    <div class="img-container">
+                        <img src="assets\pepperoni.webp" alt="Pepperoni">
+                    </div>
+                    <button id="pepperoni" class="chip">Pepperoni</button>
+                </div>
+
+                <div class="btn-container">
+                    <div class="img-container">
+                        <img src="assets\onion.webp" alt="Onion">
+                    </div>
+                    <button id="onion" class="chip">Onion</button>
+                </div>
+
+                <div class="btn-container">
+                    <div class="img-container">
+                        <img src="assets\jalapeno.webp" alt="Chili">
+                    </div>
+                    <button id="jalapano" class="chip">Jalapeño</button>
+                </div>
+
+                <div class="btn-container">
+                    <div class="img-container">
+                        <img src="assets\basil.webp" alt="Basil">
+                    </div>
+                    <button id="basil" class="chip">Basil</button>
+                </div>
+
+                <div class="btn-container">
+                    <div class="img-container">
+                        <img src="assets\sausage.webp" alt="Sausage">
+                    </div>
+                    <button id="sausage" class="chip">Sausage</button>
+                </div>
+            </div>
+            <div class="btn-container-game">
+                <button id="doneButton" onclick="submitPizza()">Submit!</button>
+                <button id="clearButton" onclick="clearPizza()">Clear!</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

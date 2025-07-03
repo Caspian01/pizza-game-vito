@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inters active Pizza Ordering Game</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@700&display=swap">
+    <link href="stylespizza.css" rel="stylesheet"></link>
+</head>
+<body>
+    <h1>Interactive Pizza Ordering Game</h1>
+    <button id="startButton" onclick="startGame()">Start Game</button>
+    <div id="gameArea">
+        <div id="orderQueue" style="order: -1;">Order: Pepperoni & Mushrooms Pizza</div>
+        <div id="ingredientsArea">
+            <div class="ingredientOption" onclick="selectIngredient(this)" data-ingredient="pepperoni">🍕<br>Pepperoni</div>
+            <div class="ingredientOption" onclick="selectIngredient(this)" data-ingredient="mushroom">🍄<br>Mushroom</div>
+            <div class="ingredientOption" onclick="selectIngredient(this)" data-ingredient="cheese">🧀<br>Cheese</div>
+            <div class="ingredientOption" onclick="selectIngredient(this)" data-ingredient="olive">🫒<br>Olive</div>
+            <div class="ingredientOption" onclick="selectIngredient(this)" data-ingredient="ham">🍖<br>Ham</div>
+            <div class="ingredientOption" onclick="selectIngredient(this)" data-ingredient="chicken">🍗<br>Chicken</div>
+            <div class="ingredientOption" onclick="selectIngredient(this)" data-ingredient="bacon">🥓<br>Bacon</div>
+            <div class="ingredientOption" onclick="selectIngredient(this)" data-ingredient="bbq_sauce">🥫<br>BBQ Sauce</div>
+            <div class="ingredientOption" onclick="selectIngredient(this)" data-ingredient="spinach">🥬<br>Spinach</div>
+            <div class="ingredientOption" onclick="selectIngredient(this)" data-ingredient="basil">🌿<br>Basil</div>
+            <div class="ingredientOption" onclick="selectIngredient(this)" data-ingredient="tomato">🍅<br>Tomato</div>
+            <div class="ingredientOption" onclick="selectIngredient(this)" data-ingredient="onion">🧅<br>Onion</div>
+            <div class="ingredientOption" onclick="selectIngredient(this)" data-ingredient="pineapple">🍍<br>Pineapple</div>
+            <div class="ingredientOption" onclick="selectIngredient(this)" data-ingredient="sausage">🍖<br>Sausage</div>
+            <div class="ingredientOption" onclick="selectIngredient(this)" data-ingredient="pepper">🌶️<br>Pepper</div>
+        </div>
+        <div id="controls">
+            <div id="score" style="font-size: 2em; color: #d35400; margin-bottom: 20px;">Score: <span id="scoreValue">0</span></div>
+            <div id="timer">Time Left: <span id="time">60</span> seconds</div>
+            <button id="doneButton" onclick="submitPizza()">Done!</button>
+            <button id="clearButton" onclick="clearPizza()">Clear</button>
+        </div>
+        
+        
+    </div>
+
+    <script>
+        // Timer Logic
+        let timeLeft = 60;
+        let timerInterval;
+        let score = 0;
+        let currentPizza = null;
+        const timerElement = document.getElementById("time");
+        const scoreElement = document.getElementById("scoreValue");
+
+        const pizzaOptions = [
+            { name: "Margherita", ingredients: ["tomato", "basil", "cheese"] },
+            { name: "Hawaiian", ingredients: ["pineapple", "cheese", "ham"] },
+            { name: "Veggie Lovers", ingredients: ["tomato", "onion", "pepper", "mushroom"] },
+            { name: "BBQ Chicken", ingredients: ["chicken", "cheese", "onion", "bbq_sauce"] },
+            { name: "Meat Lovers", ingredients: ["pepperoni", "sausage", "ham", "bacon"] },
+            { name: "Supreme", ingredients: ["pepperoni", "mushroom", "olive", "onion", "pepper"] },
+            { name: "Cheese Lover", ingredients: ["cheese"] },
+            { name: "Garden Fresh", ingredients: ["tomato", "basil", "olive", "onion"] },
+            { name: "Spicy Pepperoni", ingredients: ["pepperoni", "pepper", "cheese"] },
+            { name: "Mushroom & Spinach", ingredients: ["mushroom", "spinach", "cheese"] }
+        ];
+
+        function startGame() {
+            document.getElementById("gameArea").style.display = "flex";
+            document.getElementById("startButton").style.display = "none";
+            timeLeft = 60;
+            score = 0;
+            timerElement.innerText = timeLeft;
+            scoreElement.innerText = score;
+            clearInterval(timerInterval); // Ensure previous timer is cleared
+            currentPizza = pizzaOptions[Math.floor(Math.random() * pizzaOptions.length)];
+            document.getElementById("orderQueue").innerText = `Order: ${currentPizza.name} Pizza`;
+            timerInterval = setInterval(function () {
+                if (timeLeft > 0) {
+                    timeLeft--;
+                    timerElement.innerText = timeLeft;
+                } else {
+                    clearInterval(timerInterval);
+                    alert("Time's up! Thanks for playing!");
+                    resetGame();
+                }
+            }, 1000);
+        }
+
+        function selectIngredient(element) {
+            element.classList.toggle("selected");
+            element.classList.toggle("jiggle");
+
+            // Update score when ingredient is selected or deselected
+            if (element.classList.contains("selected")) {
+                // If the ingredient is part of the current pizza, add points, otherwise subtract points
+                if (currentPizza.ingredients.includes(element.dataset.ingredient)) {
+                    score += 10;  // Correct ingredient
+                } else {
+                    score -= 5;   // Incorrect ingredient
+                }
+            } else {
+                // If deselected, reverse the score effect
+                if (currentPizza.ingredients.includes(element.dataset.ingredient)) {
+                    score -= 10;  // Removing a correct ingredient
+                } else {
+                    score += 5;   // Removing an incorrect ingredient
+                }
+            }
+
+            // Update the score on the UI
+            scoreElement.innerText = score;
+        }
+
+        function submitPizza() {
+            clearInterval(timerInterval);
+            let level;
+            if (timeLeft > 40) {
+                level = "Master Chef";
+            } else if (timeLeft > 20) {
+                level = "Experienced Cook";
+            } else {
+                level = "Beginner";
+            }
+            const selectedIngredients = document.querySelectorAll('.ingredientOption.selected');
+            let correctIngredients = 0;
+            selectedIngredients.forEach(ingredient => {
+                if (currentPizza.ingredients.includes(ingredient.dataset.ingredient)) {
+                    correctIngredients++;
+                }
+            });
+
+            const incorrectIngredients = selectedIngredients.length - correctIngredients;
+            const missingIngredients = currentPizza.ingredients.filter(ingredient => !Array.from(selectedIngredients).some(selected => selected.dataset.ingredient === ingredient));
+            const resultMessage = `Game Over! You took ${60 - timeLeft} seconds.
+Your Score: ${score}
+` +
+                (correctIngredients === currentPizza.ingredients.length ? `Great Job! All ingredients were correct.` : `You missed some ingredients or added incorrect ones.`) +
+                (incorrectIngredients > 0 ? `
+You added ${incorrectIngredients} incorrect ingredient(s).` : '') +
+                (missingIngredients.length > 0 ? `
+Missing ingredient(s): ${missingIngredients.join(', ')}` : '');
+            alert(resultMessage);
+            resetGame();
+        }
+
+        function clearPizza() {
+            const ingredientOptions = document.querySelectorAll(".ingredientOption");
+            ingredientOptions.forEach(option => {
+                if (option.classList.contains("selected")) {
+                    // Reverse score effect for cleared ingredients
+                    if (currentPizza.ingredients.includes(option.dataset.ingredient)) {
+                        score -= 10;  // Removing a correct ingredient
+                    } else {
+                        score += 5;   // Removing an incorrect ingredient
+                    }
+                }
+                option.classList.remove("selected", "jiggle");
+            });
+            // Update the score on the UI
+            scoreElement.innerText = score;
+        }
+
+        function resetGame() {
+            document.getElementById("gameArea").style.display = "none";
+            document.getElementById("startButton").style.display = "block";
+            clearPizza();
+        }
+    </script>
+</body>
+</html>

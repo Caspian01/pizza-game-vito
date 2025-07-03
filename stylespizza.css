@@ -1,0 +1,102 @@
+body {
+    background-color: #ffe5b4;
+    font-family: 'Amatic SC', cursive;
+    text-align: center;
+}
+h1 {
+    font-size: 3em;
+    color: #d35400;
+}
+#gameArea {
+    height: auto;
+    width: 90%;
+    margin: auto;
+    padding: 20px;
+    border: 2px solid #d35400;
+    border-radius: 15px;
+    background-color: #fff;
+    display: none;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+#orderQueue {
+    margin-bottom: 20px;
+    font-size: 1.5em;
+}
+.pizzaBase {
+    width: 80%;
+    max-width: 300px;
+    height: auto;
+    aspect-ratio: 1;
+    background: url('https://img.icons8.com/office/452/pizza.png') center center/cover;
+    margin: 20px;
+    border-radius: 50%;
+    position: relative;
+}
+.ingredient {
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    cursor: grab;
+}
+#ingredientsArea {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    max-width: 90%;
+}
+.ingredientOption {
+    text-align: center;
+    line-height: 1.2;
+    width: 60px;
+    height: 60px;
+    margin: 10px;
+    background-color: #f8c471;
+    border: 2px solid #e67e22;
+    border-radius: 10px;
+    padding: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+.ingredientOption.jiggle {
+    animation: jiggle 0.2s infinite alternate;
+}
+@keyframes jiggle {
+    0% { transform: rotate(2deg); }
+    100% { transform: rotate(-2deg); }
+}
+.ingredientOption.selected {
+    background-color: #e67e22;
+}
+.ingredientOption:hover {
+    transform: scale(1.1);
+}
+#timer {
+    font-size: 2em;
+    color: #d35400;
+    margin-bottom: 20px;
+}
+#doneButton, #clearButton, #startButton {
+    font-size: 1.2em;
+    background-color: #e67e22;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 10px;
+    margin: 10px;
+}
+#doneButton:hover, #clearButton:hover, #startButton:hover {
+    background-color: #d35400;
+}
+#controls {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
